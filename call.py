@@ -30,15 +30,15 @@ call = client.calls.create(
                         from_=PHONE_NO
                     )
 
-cycle = True
-while cycle:
-    if call.status in TERMINAL_STATES:
-        cycle = False
-    else:
-        print(call.status)
-        time.sleep(2)
-        call = call.fetch()
-
-print(call.status)
-if call.status in ERROR_STATES:
-    exit(1)
+# cycle = True
+# while cycle:
+#     if call.status in TERMINAL_STATES:
+#         cycle = False
+#     else:
+#         print(call.status)
+#         time.sleep(2)
+#         call = call.fetch()
+#
+# print(call.status)
+# if call.status in ERROR_STATES:
+#     exit(1)
