@@ -2,6 +2,11 @@
 import os
 import sys
 from twilio.rest import Client
+import time
+
+# Twilio
+ERROR_STATES = ["busy", "failed", "no-answer"]
+TERMINAL_STATES = ["completed"] + ERROR_STATES
 
 # Your Account Sid and Auth Token from twilio.com/console
 # and set the environment variables. See http://twil.io/secure
@@ -24,3 +29,16 @@ call = client.calls.create(
                         to=TO,
                         from_=PHONE_NO
                     )
+
+cycle = True
+while cycle:
+    if call.status in TERMINAL_STATES:
+        cycle = False
+    else:
+        print(call.status)
+        time.sleep(2)
+        call = call.fetch()
+
+print(call.status)
+if call.status in ERROR_STATES:
+    exit(1)
